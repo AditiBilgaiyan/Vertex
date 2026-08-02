@@ -1,0 +1,41 @@
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #f4f6ff;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: #1a1a2e;
+    margin: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+.hero-btn {
+    background-color: #3646db;
+    color:white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+  background-color: #020b50;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+  .hero p {
+    font-size: 15px;
+  }
+}
