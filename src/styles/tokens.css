@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Design tokens — Vertex Learn AI
+   Modelled on the Google Cloud Vertex AI console: neutral surfaces, hairline
+   borders, low elevation, Google Blue accent, Material 3 shape + motion.
+   Every colour pair below meets WCAG AA (4.5:1) in both themes.
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces ------------------------------------------------------- */
+  --bg: #ffffff;
+  --bg-subtle: #f8f9fa;
+  --bg-muted: #f1f3f4;
+  --surface: #ffffff;
+  --surface-hover: #f8f9fa;
+  --surface-active: #f1f3f4;
+  --scrim: rgba(32, 33, 36, 0.5);
+
+  /* --- Borders -------------------------------------------------------- */
+  --border: #dadce0;
+  --border-subtle: #e8eaed;
+  --border-strong: #bdc1c6;
+
+  /* --- Text ----------------------------------------------------------- */
+  --text: #1f1f1f;          /* 16.9:1 on --bg */
+  --text-secondary: #444746; /*  9.4:1 on --bg */
+  --text-muted: #5f6368;     /*  5.9:1 on --bg */
+  --text-inverse: #ffffff;
+
+  /* --- Primary (Google Blue) ------------------------------------------ */
+  --primary: #0b57d0;        /* 6.4:1 on --bg */
+  --primary-hover: #0842a0;
+  --primary-active: #062e6f;
+  --primary-soft: #d3e3fd;
+  --primary-soft-hover: #bcd4f8;
+  --on-primary: #ffffff;
+  --on-primary-soft: #041e49;
+
+  /* --- Semantic ------------------------------------------------------- */
+  --success: #146c2e;
+  --success-soft: #c4eed0;
+  --on-success-soft: #072711;
+
+  --warning: #8f5000;
+  --warning-soft: #ffdfa6;
+  --on-warning-soft: #3d2200;
+
+  --danger: #b3261e;
+  --danger-hover: #8c1d18;
+  --danger-soft: #f9dedc;
+  --on-danger-soft: #410e0b;
+
+  /* --- Gemini accent gradient ----------------------------------------- */
+  --grad-gemini: linear-gradient(115deg, #4285f4 0%, #9b72cb 48%, #d96570 100%);
+  --grad-surface: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+
+  /* --- Elevation (Material 3) ----------------------------------------- */
+  --shadow-1: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --shadow-2: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+  --shadow-3: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+  --ring: 0 0 0 3px rgba(11, 87, 208, 0.28);
+
+  /* --- Shape ---------------------------------------------------------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-full: 999px;
+
+  /* --- Space (4px base) ----------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  /* Fluid type — min at 375px, max at 1440px */
+  --t-display: clamp(2.25rem, 1.35rem + 3.85vw, 4rem);
+  --t-h1: clamp(1.75rem, 1.29rem + 1.96vw, 2.75rem);
+  --t-h2: clamp(1.375rem, 1.16rem + 0.92vw, 1.875rem);
+  --t-h3: clamp(1.125rem, 1.04rem + 0.37vw, 1.3125rem);
+  --t-body: 1rem;      /* never below 16px on mobile */
+  --t-sm: 0.875rem;
+  --t-xs: 0.75rem;
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-body: 1.6;
+
+  /* --- Layout ---------------------------------------------------------- */
+  --container: 1200px;
+  --container-narrow: 720px;
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --dur-fast: 150ms;
+  --dur: 200ms;
+  --dur-slow: 300ms;
+
+  /* --- Z-index scale ---------------------------------------------------- */
+  --z-sticky: 10;
+  --z-dropdown: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Dark theme — follows the system by default, overridable via [data-theme]
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #131314;
+    --bg-subtle: #1b1b1b;
+    --bg-muted: #202124;
+    --surface: #1e1f20;
+    --surface-hover: #282a2c;
+    --surface-active: #303134;
+    --scrim: rgba(0, 0, 0, 0.65);
+
+    --border: #3c4043;
+    --border-subtle: #2d2f31;
+    --border-strong: #5f6368;
+
+    --text: #e3e3e3;
+    --text-secondary: #c4c7c5;
+    --text-muted: #9aa0a6;
+    --text-inverse: #1f1f1f;
+
+    --primary: #a8c7fa;
+    --primary-hover: #d3e3fd;
+    --primary-active: #e8f0fe;
+    --primary-soft: #0842a0;
+    --primary-soft-hover: #0b57d0;
+    --on-primary: #062e6f;
+    --on-primary-soft: #d3e3fd;
+
+    --success: #6dd58c;
+    --success-soft: #0f5223;
+    --on-success-soft: #c4eed0;
+
+    --warning: #ffb951;
+    --warning-soft: #6b3c00;
+    --on-warning-soft: #ffdfa6;
+
+    --danger: #f2b8b5;
+    --danger-hover: #f9dedc;
+    --danger-soft: #8c1d18;
+    --on-danger-soft: #f9dedc;
+
+    --grad-surface: linear-gradient(180deg, #1b1b1b 0%, #131314 100%);
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px 3px 1px rgba(0, 0, 0, 0.35);
+    --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 6px 2px rgba(0, 0, 0, 0.35);
+    --shadow-3: 0 4px 8px 3px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.6);
+    --ring: 0 0 0 3px rgba(168, 199, 250, 0.32);
+
+    color-scheme: dark;
+  }
+}
+
+/* Explicit opt-in dark, regardless of system preference */
+:root[data-theme='dark'] {
+  --bg: #131314;
+  --bg-subtle: #1b1b1b;
+  --bg-muted: #202124;
+  --surface: #1e1f20;
+  --surface-hover: #282a2c;
+  --surface-active: #303134;
+  --scrim: rgba(0, 0, 0, 0.65);
+
+  --border: #3c4043;
+  --border-subtle: #2d2f31;
+  --border-strong: #5f6368;
+
+  --text: #e3e3e3;
+  --text-secondary: #c4c7c5;
+  --text-muted: #9aa0a6;
+  --text-inverse: #1f1f1f;
+
+  --primary: #a8c7fa;
+  --primary-hover: #d3e3fd;
+  --primary-active: #e8f0fe;
+  --primary-soft: #0842a0;
+  --primary-soft-hover: #0b57d0;
+  --on-primary: #062e6f;
+  --on-primary-soft: #d3e3fd;
+
+  --success: #6dd58c;
+  --success-soft: #0f5223;
+  --on-success-soft: #c4eed0;
+
+  --warning: #ffb951;
+  --warning-soft: #6b3c00;
+  --on-warning-soft: #ffdfa6;
+
+  --danger: #f2b8b5;
+  --danger-hover: #f9dedc;
+  --danger-soft: #8c1d18;
+  --on-danger-soft: #f9dedc;
+
+  --grad-surface: linear-gradient(180deg, #1b1b1b 0%, #131314 100%);
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.6), 0 1px 3px 1px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 6px 2px rgba(0, 0, 0, 0.35);
+  --shadow-3: 0 4px 8px 3px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.6);
+  --ring: 0 0 0 3px rgba(168, 199, 250, 0.32);
+
+  color-scheme: dark;
+}

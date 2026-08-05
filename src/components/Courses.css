@@ -1,55 +1,105 @@
 .courses {
-   padding: 60px 40px;
-  text-align: center;
+  background: var(--bg);
 }
 
-.courses h2 {
-    font-size: 32 px;
-    margin-bottom: 40px;
-    color: #ededef;
+/* auto-fit + minmax means the grid reflows on its own — no breakpoint per
+   column count, and it never overflows below 320px. */
+.courses__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: var(--s-5);
 }
 
-.course-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-
+.courses__grid > li {
+  display: flex;
 }
 
-.course-card {
-     background: white;
-     border: 1px solid #e0e0e0;
-     border-radius: 12px;
-     padding: 24px;
-     width: 280px;
-     text-align: left;
-     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+.course {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.course-card h3 {
-    margin-top: 0;
-    color: #1a1a2e;
+.course__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
 }
 
-.course-card p {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.5;
+/* Per-card accent so a full grid has some rhythm */
+.course--purple .course__icon {
+  background: color-mix(in srgb, #9b72cb 18%, var(--surface));
+  color: #7b4fb0;
+}
+.course--rose .course__icon {
+  background: color-mix(in srgb, #d96570 18%, var(--surface));
+  color: #b4434f;
+}
+.course--green .course__icon {
+  background: var(--success-soft);
+  color: var(--on-success-soft);
 }
 
-.course-card button {
-    background-color: #1a1a2e;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .course-card {
-    width: 90%;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .course--purple .course__icon {
+    color: #d5b3f0;
   }
+  :root:not([data-theme='light']) .course--rose .course__icon {
+    color: #f5b0b6;
+  }
+}
+:root[data-theme='dark'] .course--purple .course__icon {
+  color: #d5b3f0;
+}
+:root[data-theme='dark'] .course--rose .course__icon {
+  color: #f5b0b6;
+}
+
+.course__title {
+  margin-top: var(--s-4);
+  font-size: var(--t-h3);
+}
+
+.course__desc {
+  margin-top: var(--s-2);
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  /* Keep every card the same shape regardless of copy length */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+
+.course__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  font-size: var(--t-xs);
+  color: var(--text-muted);
+}
+
+.course__footer {
+  margin-top: auto;
+  padding-top: var(--s-6);
+}
+
+.courses__notice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-4);
+  max-width: 640px;
 }

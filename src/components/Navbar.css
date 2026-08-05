@@ -1,44 +1,183 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+/* Frosted + hairline border only once the page has scrolled */
+.navbar--scrolled {
+  border-bottom-color: var(--border);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(12px) saturate(1.6);
+  -webkit-backdrop-filter: blur(12px) saturate(1.6);
+}
+
+/* color-mix isn't everywhere yet — fall back to a solid bar */
+@supports not (background: color-mix(in srgb, red 50%, transparent)) {
+  .navbar--scrolled {
+    background: var(--bg);
+  }
+}
+
+.navbar__inner {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  background-color: #1a1a2e;
-  color: white;
+  justify-content: space-between;
+  gap: var(--s-6);
+  height: var(--topbar-h);
 }
 
-.logo {
-    font-size: 22px;
-    margin: 0;
+.navbar__nav {
+  display: none;
+  flex: 1;
+  justify-content: center;
 }
 
-.nav-links {
-    display:flex;
-    list-style: none;
-    gap: 30px;
-    padding: 0px;
-    margin: 0px;
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
 }
 
-.nav-links li {
-    cursor :pointer;
-    font-size: 16px;
+.navbar__link {
+  display: block;
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-full);
+  color: var(--text-secondary);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
-.nav-links li:hover{
-    color : #8c97f8;
+.navbar__link:hover {
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 20px;
+.navbar__link.is-active {
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+}
+
+.navbar__actions {
+  display: none;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.navbar__mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+/* --- Mobile drawer ----------------------------------------------------- */
+
+.navbar__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--scrim);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+.navbar__scrim.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: calc(var(--z-overlay) + 1);
+  width: min(320px, 86vw);
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-4) var(--s-5) var(--s-8);
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-3);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--dur-slow) var(--ease), visibility var(--dur-slow) var(--ease);
+  overflow-y: auto;
+}
+
+.navbar__drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.navbar__drawer:focus {
+  outline: none;
+}
+
+.navbar__drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: var(--topbar-h);
+  margin-bottom: var(--s-4);
+}
+
+.navbar__drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding-bottom: var(--s-6);
+  margin-bottom: var(--s-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar__drawer-link {
+  display: block;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.navbar__drawer-link:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.navbar__drawer-link.is-active {
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+}
+
+.navbar__drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* --- Desktop ----------------------------------------------------------- */
+
+@media (min-width: 900px) {
+  .navbar__nav,
+  .navbar__actions {
+    display: flex;
   }
-  .nav-links {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
+
+  .navbar__mobile-actions {
+    display: none;
   }
 
+  .navbar__scrim,
+  .navbar__drawer {
+    display: none;
+  }
 }

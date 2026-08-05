@@ -1,0 +1,276 @@
+.shell {
+  display: flex;
+  flex: 1;
+  min-height: 100svh;
+  background: var(--bg-subtle);
+}
+
+/* --- Sidebar (shared markup for rail + drawer) ---------------------------- */
+
+.shell__sidebar,
+.shell__drawer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  width: var(--sidebar-w);
+  padding: var(--s-5);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.shell__sidebar {
+  display: none;
+  position: sticky;
+  top: 0;
+  flex: none;
+  height: 100svh;
+  overflow-y: auto;
+}
+
+.shell__brand {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-inline: var(--s-2);
+}
+
+.shell__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.shell__nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-full);
+  color: var(--text-secondary);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.shell__nav-link:hover {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.shell__nav-link.is-active {
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+  font-weight: 600;
+}
+
+/* --- Sidebar promo -------------------------------------------------------- */
+
+.shell__upsell {
+  margin-top: auto;
+  padding: var(--s-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg-subtle);
+}
+
+.shell__upsell-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--s-3);
+  border-radius: var(--r-full);
+  background: var(--grad-gemini);
+  color: #fff;
+}
+
+.shell__upsell-title {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.shell__upsell-text {
+  margin: var(--s-1) 0 var(--s-4);
+  font-size: var(--t-xs);
+  color: var(--text-muted);
+}
+
+/* --- Sidebar user --------------------------------------------------------- */
+
+.shell__user {
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.shell__user-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+  padding-inline: var(--s-2);
+}
+
+.shell__user-meta {
+  min-width: 0;
+}
+
+.shell__user-name {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell__user-email {
+  font-size: var(--t-xs);
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Drawer (below 1024px) ------------------------------------------------ */
+
+.shell__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--scrim);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+.shell__scrim.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shell__drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: calc(var(--z-overlay) + 1);
+  width: min(var(--sidebar-w), 84vw);
+  box-shadow: var(--shadow-3);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform var(--dur-slow) var(--ease), visibility var(--dur-slow) var(--ease);
+  overflow-y: auto;
+}
+
+.shell__drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.shell__drawer:focus {
+  outline: none;
+}
+
+.shell__drawer-close {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: calc(var(--s-6) * -1 + var(--s-1));
+}
+
+/* --- Content -------------------------------------------------------------- */
+
+.shell__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell__topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: var(--topbar-h);
+  padding: var(--s-3) var(--s-5);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-subtle) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(1.6);
+  -webkit-backdrop-filter: blur(12px) saturate(1.6);
+}
+
+@supports not (background: color-mix(in srgb, red 50%, transparent)) {
+  .shell__topbar {
+    background: var(--bg-subtle);
+  }
+}
+
+.shell__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.shell__title {
+  font-size: var(--t-h2);
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell__subtitle {
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: none;
+}
+
+.shell__topbar-avatar {
+  display: none;
+}
+
+.shell__main {
+  flex: 1;
+  padding: var(--s-6) var(--s-5) var(--s-16);
+  max-width: 1280px;
+  width: 100%;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .shell__main {
+    padding: var(--s-8) var(--s-8) var(--s-20);
+  }
+
+  .shell__topbar {
+    padding-inline: var(--s-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell__sidebar {
+    display: flex;
+  }
+
+  .shell__menu-btn,
+  .shell__scrim,
+  .shell__drawer {
+    display: none;
+  }
+
+  .shell__topbar-avatar {
+    display: grid;
+  }
+}
